@@ -14,6 +14,6 @@
 Route::get('', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 //duilio-palacios/1
-Route::get('{slug}/{id}', ['as' => 'user', 'uses' => 'CandidatesController@show']);
+Route::get('{slug}/{id}', ['as' => 'candidate', 'uses' => 'CandidatesController@show']);
 //candidates/backend-developers/1
 Route::get('candidates/{slug}/{id}', ['as' => 'category', 'uses' => 'CandidatesController@category']);
