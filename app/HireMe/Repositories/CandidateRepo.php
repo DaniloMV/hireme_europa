@@ -2,6 +2,7 @@
 
 use \HireMe\Entities\Candidate;
 use HireMe\Entities\Category;
+use HireMe\Entities\User;
 
 class CandidateRepo extends BaseRepo {
 
@@ -19,6 +20,14 @@ class CandidateRepo extends BaseRepo {
                 },
             'candidates.user'
         ])->get();
+    }
+
+    public function newCandidate()
+    {
+        $user = new User();
+        $user->type = 'candidate';
+
+        return $user;
     }
 
 }

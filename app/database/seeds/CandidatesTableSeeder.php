@@ -19,7 +19,7 @@ class CandidatesTableSeeder extends Seeder {
             $user = User::create([
                 'full_name' => $fullName,
                 'email'     => $faker->email,
-                'password'  => \Hash::make(123456),
+                'password'  => '123456',
                 'type'      => 'candidate'
             ]);
 
