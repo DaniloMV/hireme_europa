@@ -95,8 +95,7 @@ return array(
 	*/
 
 	'attributes' => array(
-		'username' => 'usuario',
-		'password' => 'contraseña'
+		'full_name' => 'Nombre completo'
 	),
 
 );
