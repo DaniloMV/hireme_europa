@@ -8,7 +8,7 @@ abstract class BaseManager {
     protected $entity;
     protected $data;
 
-    public function __construct($entity, $data)
+    public function __construct(\Eloquent $entity, $data)
     {
         $this->entity = $entity;
         $this->data = array_only($data, array_keys($this->getRules()));
@@ -28,11 +28,16 @@ abstract class BaseManager {
         }
     }
 
+    public function prepareData($data)
+    {
+        return $data;
+    }
+
     public function save()
     {
         $this->isValid();
 
-        $this->entity->fill($this->data);
+        $this->entity->fill($this->prepareData($this->data));
         $this->entity->save();
 
         return true;

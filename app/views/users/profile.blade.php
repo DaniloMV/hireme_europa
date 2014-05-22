@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <h1>Edita tu información</h1>
 
-            {{ Form::model($user, ['route' => 'update_account', 'method' => 'PUT', 'role' => 'form', 'novalidate']) }}
+            {{ Form::model($candidate, ['route' => 'update_profile', 'method' => 'PUT', 'role' => 'form', 'novalidate']) }}
 
             {{ Field::url('website_url') }}
 

@@ -55,7 +55,11 @@ App::error(function(\HireMe\Managers\ValidationException $exception, $code)
 {
     return Redirect::back()->withInput()->withErrors($exception->getErrors());
 });
-
+/*
+App::error(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $exception) {
+   return '404';
+});
+*/
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler
@@ -84,3 +88,8 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+function is_admin()
+{
+    return Auth::check() && Auth::user()->type == 'admin';
+}
