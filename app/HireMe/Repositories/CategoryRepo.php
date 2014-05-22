@@ -9,5 +9,18 @@ class CategoryRepo extends BaseRepo {
         return new Category;
     }
 
+    public function getList()
+    {
+        $categories = Category::get();
+
+        $list = array();
+
+        foreach ($categories as $category)
+        {
+            $list[$category->id] = $category->name;
+        }
+
+        return $list;
+    }
 
 }

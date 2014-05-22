@@ -95,7 +95,8 @@ return array(
 	*/
 
 	'attributes' => array(
-		'full_name' => 'Nombre completo'
+		'full_name' => 'Nombre completo',
+        'category_id' => 'Categoría'
 	),
 
 );

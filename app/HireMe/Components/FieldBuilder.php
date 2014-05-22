@@ -73,7 +73,8 @@ class FieldBuilder {
         switch ($type)
         {
             case 'select':
-                return $this->form->select($name, $options, $vale, $attributes);
+                $options = array('' => 'Seccione') + $options;
+                return $this->form->select($name, $options, $value, $attributes);
             case 'password':
                 return $this->form->password($name, $attributes);
             case 'checkbox':
@@ -125,6 +126,11 @@ class FieldBuilder {
     public function password($name, $attributes = array())
     {
         return $this->input('password', $name, null, $attributes);
+    }
+
+    public function select($name, $options, $value = null, $attributes = array())
+    {
+        return $this->input('select', $name, $value, $attributes, $options);
     }
 
     public function __call($method, $params)

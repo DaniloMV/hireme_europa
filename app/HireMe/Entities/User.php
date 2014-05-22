@@ -21,6 +21,11 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
+    public function candidate()
+    {
+        return $this->hasOne('HireMe\Entities\Candidate', 'id', 'id');
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = \Hash::make($value);

@@ -4,14 +4,19 @@ use HireMe\Entities\User;
 
 use \HireMe\Managers\RegisterManager;
 use \HireMe\Repositories\CandidateRepo;
+use HireMe\Repositories\CategoryRepo;
+use HireMe\Managers\AccountManager;
 
 class UsersController extends BaseController {
 
     protected $candidateRepo;
+    protected $categoryRepo;
 
-    public function __construct(CandidateRepo $candidateRepo)
+    public function __construct(CandidateRepo $candidateRepo,
+                                CategoryRepo  $categoryRepo)
     {
         $this->candidateRepo = $candidateRepo;
+        $this->categoryRepo  = $categoryRepo;
     }
 
     public function signUp()
@@ -24,12 +29,38 @@ class UsersController extends BaseController {
         $user = $this->candidateRepo->newCandidate();
         $manager = new RegisterManager($user, Input::all());
 
-        if ($manager->save())
-        {
-            return Redirect::route('home');
-        }
+        $manager->save();
 
-        return Redirect::back()->withInput()->withErrors($manager->getErrors());
+        return Redirect::route('home');
+    }
+
+    // User edit profile - data
+
+    public function account()
+    {
+        $user = Auth::user();
+        return View::make('users/account', compact('user'));
+    }
+
+    public function updateAccount()
+    {
+        $user = Auth::user();
+        $manager = new AccountManager($user, Input::all());
+
+        $manager->save();
+
+        return Redirect::route('home');
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        $candidate = $user->candidate;
+
+        $categories = $this->categoryRepo->getList();
+        $job_types  = Lang::get('utils.job_types');
+
+        return View::make('users/profile', compact('user', 'candidate', 'categories', 'job_types'));
     }
 
 } 
